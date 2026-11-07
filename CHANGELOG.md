@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.2](https://github.com/Diaoul/hass-pilot-wire-climate/compare/3.0.1...3.0.2) (2026-11-07)
+
+
+### Bug Fixes
+
+* **climate:** use the native temperature attributes ([6cb0346](https://github.com/Diaoul/hass-pilot-wire-climate/commit/6cb0346455e40087d6a32182bd6413a1b0e987db))
+
 ## [3.0.1](https://github.com/Diaoul/hass-pilot-wire-climate/compare/3.0.0...3.0.1) (2026-10-10)
 
 
