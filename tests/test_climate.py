@@ -1,3 +1,4 @@
+import importlib
 import logging
 
 from homeassistant.core import Context, HomeAssistant, ServiceCall, State
@@ -7,6 +8,8 @@ from pytest_homeassistant.common import (
     async_mock_service,
     mock_restore_cache_with_extra_data,
 )
+
+from custom_components.pilot_wire_climate import climate
 
 from .conftest import (
     FOUR_OPTIONS,
@@ -489,6 +492,18 @@ async def test_kelvin_temperature_sensor(hass: HomeAssistant, select_entity):
     assert hass.states.get(climate_entity_id(hass, entry)).attributes[
         "current_temperature"
     ] == pytest.approx(20)
+
+
+async def test_no_deprecated_climate_api(hass: HomeAssistant, select_entity, caplog):
+    # A class-level deprecated attribute is only reported when the class is defined.
+    importlib.reload(climate)
+    hass.states.async_set(TEMPERATURE, "68", {"unit_of_measurement": "°F"})
+    entry = helper_entry(temperature_sensor=TEMPERATURE)
+    await setup_helper(hass, entry)
+    hass.states.async_set(TEMPERATURE, "69", {"unit_of_measurement": "°F"})
+    await hass.async_block_till_done()
+
+    assert "deprecated" not in caplog.text
 
 
 async def test_unknown_mode_has_no_preset(hass: HomeAssistant, select_entity, caplog):

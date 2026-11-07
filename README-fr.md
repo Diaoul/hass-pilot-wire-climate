@@ -22,7 +22,7 @@ Une entrée (helper) Home Assistant qui transforme un module fil pilote en véri
 
 Cliquez sur le bouton ci-dessus pour ajouter ce dépôt à HACS, puis téléchargez **Pilot Wire Climate** et redémarrez Home Assistant.
 
-**Nécessite Home Assistant 2026.10 ou plus récent** (vérifié par HACS).
+**Nécessite Home Assistant 2026.11 ou plus récent** (vérifié par HACS).
 
 > **Si vous venez de [faizpuru/ha-pilot-wire-climate](https://github.com/faizpuru/ha-pilot-wire-climate) :**
 > ce fork n'a ni configuration YAML ni mode `none`. Recréez les thermostats

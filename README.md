@@ -22,7 +22,7 @@ A Home Assistant helper that turns a pilot wire heater module into a proper `cli
 
 Click the button above to add this repository to HACS, then download **Pilot Wire Climate** and restart Home Assistant.
 
-**Requires Home Assistant 2026.10 or newer** (enforced by HACS).
+**Requires Home Assistant 2026.11 or newer** (enforced by HACS).
 
 > **Coming from [faizpuru/ha-pilot-wire-climate](https://github.com/faizpuru/ha-pilot-wire-climate):**
 > this fork has no YAML configuration and no `none` preset. Recreate YAML

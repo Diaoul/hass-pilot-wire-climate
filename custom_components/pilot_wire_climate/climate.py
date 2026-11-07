@@ -79,7 +79,7 @@ class PilotWireClimate(ClimateEntity, RestoreEntity):
         | ClimateEntityFeature.TURN_OFF
         | ClimateEntityFeature.TURN_ON
     )
-    _attr_temperature_unit = UnitOfTemperature.CELSIUS
+    _attr_native_temperature_unit = UnitOfTemperature.CELSIUS
     _attr_translation_key: str = "pilot_wire"
 
     def __init__(self, hass: HomeAssistant, config_entry: PilotWireConfigEntry) -> None:
@@ -170,20 +170,19 @@ class PilotWireClimate(ClimateEntity, RestoreEntity):
 
     @callback
     def _async_read_temperature(self, state: State | None) -> None:
-        self._attr_current_temperature = self._read_float(state, "temperature")
-        if state is None or self._attr_current_temperature is None:
+        temperature = self._read_float(state, "temperature")
+        self._attr_native_current_temperature = temperature
+        if state is None or temperature is None:
             return
         unit = state.attributes.get(ATTR_UNIT_OF_MEASUREMENT)
         if unit == UnitOfTemperature.KELVIN:
-            # A climate entity's temperature unit can only be °C or °F.
-            self._attr_current_temperature = TemperatureConverter.convert(
-                self._attr_current_temperature,
-                UnitOfTemperature.KELVIN,
-                UnitOfTemperature.CELSIUS,
+            # The documented native units are only °C and °F.
+            self._attr_native_current_temperature = TemperatureConverter.convert(
+                temperature, UnitOfTemperature.KELVIN, UnitOfTemperature.CELSIUS
             )
             unit = UnitOfTemperature.CELSIUS
         if unit in (UnitOfTemperature.CELSIUS, UnitOfTemperature.FAHRENHEIT):
-            self._attr_temperature_unit = unit
+            self._attr_native_temperature_unit = unit
 
     @callback
     def _async_read_power(self, state: State | None) -> None:
