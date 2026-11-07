@@ -3,7 +3,7 @@ import logging
 from homeassistant.core import Context, HomeAssistant, ServiceCall, State
 from homeassistant.exceptions import HomeAssistantError, ServiceValidationError
 import pytest
-from pytest_homeassistant_custom_component.common import (
+from pytest_homeassistant.common import (
     async_mock_service,
     mock_restore_cache_with_extra_data,
 )

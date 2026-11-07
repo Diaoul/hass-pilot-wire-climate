@@ -1,13 +1,11 @@
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers import device_registry as dr, entity_registry as er
 import pytest
-from pytest_homeassistant_custom_component.common import MockConfigEntry
+from pytest_homeassistant.common import MockConfigEntry
 
 # Imported before the hass fixture puts its own test config dir first on
 # sys.path, whose custom_components package would otherwise shadow this one.
 from custom_components.pilot_wire_climate.const import DOMAIN
-
-pytest_plugins = "pytest_homeassistant_custom_component"
 
 SELECT = "select.heater_pilot_wire_mode"
 TEMPERATURE = "sensor.heater_temperature"
@@ -15,11 +13,6 @@ HUMIDITY = "sensor.heater_humidity"
 POWER = "sensor.heater_power"
 SIX_OPTIONS = ["off", "frost_protection", "eco", "comfort", "comfort_-1", "comfort_-2"]
 FOUR_OPTIONS = ["off", "frost_protection", "eco", "comfort"]
-
-
-@pytest.fixture(autouse=True)
-def auto_enable_custom_integrations(enable_custom_integrations):
-    return
 
 
 @pytest.fixture
